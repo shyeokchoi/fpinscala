@@ -1,108 +1,66 @@
 ---
 name: exercise-coaching
-description: Use this skill when the user shares their own solution to a programming exercise and asks for review, feedback, hints, coaching, improvement points, Scala best-practice guidance, or convention feedback. Trigger especially for Scala or functional programming exercises. Never provide the final answer, directly fix the user's code, or rewrite their solution into the correct version.
+description: Provide coaching and hints for fpinscala programming exercises. Use when the user shares a solution for review, asks for hints or feedback, or asks about a chapter/exercise such as "chapter 2 exercise 1", "exercise 2.1", or "review chapter 2 exercise 1". When chapter and exercise numbers are known, read the matching answerkey hint file and include it in a separate section.
 ---
 
 # Exercise Coaching
 
-## Prime Directive
+## Boundary
 
-Never give the final answer.
+Coach the user toward their own solution. Do not patch exercise code, rewrite the full solution, or provide `answerkey/*.answer.md` content unless the user explicitly asks for the answer. For normal hint/review requests, use `answerkey/<folder>/<NN>.hint.md`.
 
-- Do not rewrite the user's solution into a correct solution.
-- Do not directly patch or edit the user's exercise code.
-- Do not provide a complete alternative implementation.
-- Do not reveal the missing key step if that would solve the exercise.
-- Coach through observations, principles, questions, and small unrelated examples.
+## Chapter Map
 
-## Goal
+Use this map from chapter number to exercise package and answerkey folder:
 
-Help the user improve their own exercise solution.
-
-- Identify likely mistakes.
-- Point out inefficient or fragile parts.
-- Explain relevant Scala conventions.
-- Explain relevant functional programming principles.
-- Give enough guidance for the user to continue independently.
+| Chapter | Folder |
+| --- | --- |
+| 2 | `gettingstarted` |
+| 3 | `datastructures` |
+| 4 | `errorhandling` |
+| 5 | `laziness` |
+| 6 | `state` |
+| 7 | `parallelism` |
+| 8 | `testing` |
+| 9 | `parsing` |
+| 10 | `monoids` |
+| 11 | `monads` |
+| 12 | `applicative` |
+| 13 | `iomonad` |
+| 14 | `localeffects` |
+| 15 | `streamingio` |
 
 ## Workflow
 
-### Step 1: Understand the Exercise Boundary
+1. Determine the exercise:
+   - If the user gives `chapter n exercise m` or `exercise n.m`, map `n` with the table and zero-pad `m` for answerkey files, for example `01.hint.md`.
+   - If the user only shares code or a function name, infer the exercise from `src/main/scala/fpinscala/exercises/` and nearby comments when possible.
+   - If the exercise remains ambiguous, ask one concise clarification question.
+2. Read only the relevant exercise source and the user's submitted code.
+3. When chapter and exercise numbers are known, read `answerkey/<folder>/<NN>.hint.md` and include its content under `Answer-Key Hint`.
+4. Analyze the user's solution for behavior, edge cases, Scala style, FP style, stack safety, purity, and unnecessary complexity.
+5. Give progressive hints without revealing a complete replacement implementation.
 
-- Identify the exercise goal from the prompt, filename, or surrounding text.
-- Identify what the user has already attempted.
-- Avoid looking up or using answer keys unless the user explicitly asks for comparison.
-- If answer-key files are visible in the repo, do not use them for coaching.
+## Hint Format
 
-### Step 2: Review the User's Solution
+Use this structure for hint or review responses:
 
-- Check correctness at the level of behavior and edge cases.
-- Check unnecessary complexity.
-- Check partial functions, unsafe calls, mutation, side effects, and non-tail recursion.
-- Check whether types communicate intent.
-- Check whether the solution follows local Scala style.
-- Do not present the exact corrected code.
+```markdown
+**Overall**
+Brief assessment of whether the current direction is sound.
 
-### Step 3: Turn Findings into Coaching
+**Answer-Key Hint**
+Source: `answerkey/<folder>/<NN>.hint.md`
 
-- Start with the most important issue.
-- Describe the symptom, not the final fix.
-- Ask a short guiding question when it helps.
-- Explain the general principle behind the issue.
-- Use tiny examples that are not a direct rewrite of the user's code.
-- Prefer hints in increasing strength.
+<Include the repository hint content. If the hint file is missing, say so.>
 
-### Step 4: Best-Practice Feedback
+**Agent Hint**
+- The most important observation from the user's code.
+- One or two focused hints based on the code and exercise requirements.
+- Mention edge cases or properties worth checking.
 
-- Generalize the practice before showing any example.
-- Keep examples small and detached from the submitted solution.
-- Use examples only to teach a concept.
-- Avoid code that can be copied into the exercise as the answer.
+**Next Step**
+One concrete thing for the user to try next.
+```
 
-## Output Format
-
-Use concise Markdown.
-
-- `Overall`: brief assessment.
-- `Coaching Notes`: prioritized findings.
-- `Principle`: the Scala or FP idea behind each finding.
-- `Small Example`: optional and unrelated to the user's exact solution.
-- `Next Step`: one concrete action for the user to try.
-
-## Allowed Guidance
-
-- Point to suspicious expressions.
-- Name possible edge cases.
-- Suggest a property to test.
-- Explain a Scala convention.
-- Explain a functional programming principle.
-- Offer a small hint.
-- Offer a second, stronger hint if the user asks.
-
-## Disallowed Guidance
-
-- Full corrected solution.
-- Direct replacement code for the submitted function.
-- Step-by-step derivation that reaches the final answer.
-- Edits to the user's exercise file.
-- Comparisons against an answer key unless explicitly requested.
-- Statements like "replace your code with this".
-
-## Scala and FP Principles to Prefer
-
-- Prefer expressions over statements.
-- Prefer immutable values.
-- Keep functions pure when the exercise is about FP.
-- Prefer total functions over unsafe partial behavior.
-- Let types narrow invalid states.
-- Prefer pattern matching when it clarifies algebraic structure.
-- Prefer `Option`, `Either`, or explicit results over `null` or exceptions when appropriate.
-- Use recursion carefully, and consider stack safety.
-- Keep names meaningful and conventional.
-
-## Final Check
-
-- The user still has to solve the exercise.
-- Feedback is specific but not a solution.
-- Examples are short and not directly reusable.
-- The response is kind, direct, and concise.
+For very small questions, keep the same sections but make each section short. If no chapter/exercise number is known, omit `Answer-Key Hint` and explain that the answerkey hint was not loaded.
