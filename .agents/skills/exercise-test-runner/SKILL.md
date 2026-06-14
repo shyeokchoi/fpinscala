@@ -15,7 +15,7 @@ Run the narrowest available test command for the requested fpinscala chapter or 
 - Do not read `src/main/scala/fpinscala/answers/`.
 - Do not infer correctness from answer files.
 - Read exercise source comments and exercise test suites only to map the requested exercise to tests.
-- Report test results, not a final answer implementation.
+- Report only pass/fail status; never explain or hint at why a failure happened.
 
 ## Chapter Map
 
@@ -54,10 +54,10 @@ Use this map from chapter number to exercise package folder:
    - Prefer test names containing `Exercise n.m`, `Exercises n.m`, or `Exercise m`.
    - If tests are not numbered, find `Exercise m` comments in the exercise source and search the suite files for the nearby function, object, or method names.
    - If one exercise has multiple tests, run all matching tests or the narrowest wildcard that covers them.
-   - If mapping is genuinely ambiguous, show the candidate tests and ask one concise clarification question.
+   - If mapping is genuinely ambiguous, ask one concise clarification question without listing candidate test names.
 6. Run tests from the repository root with `rtk scala-cli test`.
 7. If Scala CLI fails because Bloop or cache directories outside the sandbox are inaccessible, rerun the same command with escalation approval.
-8. Summarize the command and result. Include failing test names and a brief error summary, without exposing generated counterexamples or full assertion payloads. Do not provide the exercise solution.
+8. Summarize only the result. If the run fails, say only that the requested test run failed. Do not include failing test names, error summaries, exception types, line numbers, stack traces, assertion details, generated counterexamples, concrete failing inputs, or any interpretation of the likely cause. Do not provide the exercise solution.
 
 ## Commands
 
@@ -89,7 +89,8 @@ rtk scala-cli test . -- 'fpinscala.exercises.<folder>.*'
 
 Keep the response concise:
 
-- State which test command ran.
-- Say whether it passed or failed.
-- If a test fails, report the failed test name and a short failure summary, but do not include generated counterexamples, concrete failing inputs, or full assertion payloads.
-- If no test exists for the requested exercise, say that clearly and list the closest suite/test names found.
+- For a passing run, say that the requested test run passed.
+- For a failing run, say only that the requested test run failed.
+- Do not state failing test names, suite names, function names from failures, error messages, exception types, stack traces, line numbers, assertion payloads, generated counterexamples, concrete failing inputs, or why the failure likely happened.
+- Do not include the test command in the final response when the run fails, because filters may reveal which behavior failed.
+- If no test exists for the requested exercise, say only that no matching test exists.
