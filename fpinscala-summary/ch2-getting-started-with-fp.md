@@ -10,3 +10,19 @@
 * Especially when writing HOFs, we want to write code that works for any given type.
 * Polymorphism in FP differs from polymorphism in object-oriented languages.
     * It does not rely on subtyping or inheritance.
+
+# Function Literals
+
+* A function literal defines an object with an `apply` method.
+* Scala lets objects with `apply` be called like functions.
+    * `lessThan(10, 20)` is syntax for `lessThan.apply(10, 20)`.
+* Function types are ordinary traits such as `Function1`, `Function2`, and `Function3`.
+    * `(Int, Int) => Boolean` is short for `Function2[Int, Int, Boolean]`.
+* Since functions are ordinary objects, they are first-class values.
+
+```scala
+val lessThan = (a: Int, b: Int) => a < b
+
+lessThan(10, 20)
+lessThan.apply(10, 20)
+```
