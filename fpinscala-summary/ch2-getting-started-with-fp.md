@@ -26,3 +26,15 @@ val lessThan = (a: Int, b: Int) => a < b
 lessThan(10, 20)
 lessThan.apply(10, 20)
 ```
+
+# Polymorphic Functions Restrict Implementations
+
+* If a function is polymorphic in type `A`, it cannot use type-specific operations on `A`.
+* It can only use operations provided through its parameters.
+* This restricts the set of useful implementations.
+* For example, a pure implementation of `partial1` has one meaningful shape:
+
+```scala
+def partial1[A, B, C](a: A, f: (A, B) => C): B => C =
+  b => f(a, b)
+```
