@@ -11,8 +11,8 @@ Revise the given Markdown summary in two steps.
 
 - Keep sentences short.
 - Prefer bullet points.
-- Preserve the author's intent.
-- Improve clarity without adding noise.
+- Strictly preserve the author's intent, meaning, and nuance.
+- Improve clarity and flow without changing the core message or removing important emphasis.
 - Add functional programming or Scala context only when it truly helps.
 
 ## Inputs
@@ -25,9 +25,10 @@ Revise the given Markdown summary in two steps.
 
 ### Step 1: English Polish
 
-- Fix awkward English.
-- Make phrasing natural and concise.
-- Prefer active voice.
+- Fix awkward English, grammatical errors, and unnatural phrasing.
+- Make sentences concise and direct while preserving the exact meaning, logical implications, and tone of the original text.
+- Do not alter the core message, developer intent, or prescriptive nuances (e.g., changing "we want to write code..." to passive facts).
+- Prefer active voice when it aligns with the author's intent.
 - Remove redundant wording.
 - Keep terminology consistent.
 - Preserve Markdown structure unless a small restructure improves readability.
@@ -77,4 +78,5 @@ Return a review report.
 - The revised Markdown is readable on its own.
 - The report clearly separates Step 1 and Step 2.
 - Added content is accurate and short.
+- The original meaning, intent, and key nuances are fully preserved without distortion.
 - The final answer does not exceed the user's requested scope.
