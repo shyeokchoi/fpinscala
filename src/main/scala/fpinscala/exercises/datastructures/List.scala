@@ -67,7 +67,13 @@ object List: // `List` companion object. Contains functions for creating and wor
 
   def setHead[A](l: List[A], h: A): List[A] = Cons(h, tail(l))
 
-  def drop[A](l: List[A], n: Int): List[A] = ???
+  @annotation.tailrec
+  def drop[A](l: List[A], n: Int): List[A] =
+    if n <= 0 then l
+    else
+      l match
+        case Cons(_, xs) => drop(xs, n - 1)
+        case Nil         => Nil
 
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
 
