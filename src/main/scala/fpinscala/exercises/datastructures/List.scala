@@ -81,7 +81,30 @@ object List: // `List` companion object. Contains functions for creating and wor
       case Cons(h, xs) if f(h) => dropWhile(xs, f)
       case _                   => l
 
-  def init[A](l: List[A]): List[A] = ???
+  // def init[A](l: List[A]): List[A] =
+  // l match
+  // case Nil                    => throw Exception()
+  // case Cons(_, Nil)           => Nil
+  // case Cons(h1, Cons(h2, xs)) => Cons(h1, init(Cons(h2, xs)))
+
+  // tail recursive version
+  def init[A](l: List[A]): List[A] =
+    @annotation.tailrec
+    def go(remaining: List[A], acc: List[A]): List[A] =
+      remaining match
+        case Nil          => throw Exception()
+        case Cons(_, Nil) => acc
+        case Cons(h, rem) => go(rem, Cons(h, acc))
+
+    val reversed = go(l, Nil)
+
+    @annotation.tailrec
+    def reverse(l: List[A], acc: List[A]): List[A] =
+      l match
+        case Nil         => acc
+        case Cons(h, xs) => reverse(xs, Cons(h, acc))
+
+    reverse(reversed, Nil)
 
   def length[A](l: List[A]): Int = ???
 
