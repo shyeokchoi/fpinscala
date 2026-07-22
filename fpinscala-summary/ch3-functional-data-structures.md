@@ -38,3 +38,34 @@ val extended = List.Cons(1, original)
 - `extended` reuses the entire `original` list as its tail.
 - `original` remains unchanged and can still be used independently.
 - Prepending an element therefore takes constant time and does not copy the original list.
+
+# Multiple Parameter Lists
+
+A Scala method can have multiple parameter lists.
+The original `dropWhile` definition has one parameter list:
+
+```scala
+def dropWhile[A](l: List[A], f: A => Boolean): List[A] =
+  l match
+    case Cons(h, xs) if f(h) => dropWhile(xs, f)
+    case _                   => l
+
+val xs: List[Int] = List(1, 2, 3, 4, 5)
+val ex1 = dropWhile(xs, x => x < 4)
+```
+
+We can instead define it with two parameter lists:
+
+```scala
+def dropWhile[A](as: List[A])(f: A => Boolean): List[A] =
+  as match
+    case Cons(h, t) if f(h) => dropWhile(t)(f)
+    case _                  => as
+
+val xs: List[Int] = List(1, 2, 3, 4, 5)
+val ex1 = dropWhile(xs)(x => x < 4)
+```
+
+- `dropWhile(xs)` determines that `A` is `Int`.
+- Scala uses this type information when it checks the next argument list.
+- Type information therefore flows naturally from left to right at the call site.
