@@ -2,8 +2,11 @@
 
 ## Step 1: English Polish
 
-- Changed:
-- Reason:
+| Before | After | Issue | Learning point |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+- Overall changes:
 - Notes:
 
 ## Step 2: Technical Review and Enrichment

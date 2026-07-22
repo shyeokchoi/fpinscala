@@ -1,6 +1,6 @@
 ---
 name: summary-review
-description: Use this skill when the user asks to revise, review, polish, or enrich a Markdown summary, note, chapter summary, or study memo, especially for functional programming or Scala content. Trigger when the user wants awkward English fixed, incorrect content corrected, or FP/Scala best-practice context added, with a concise step-by-step report.
+description: Revise, review, polish, or enrich a Markdown summary, note, chapter summary, or study memo, especially for functional programming or Scala content. Use when the user wants awkward English fixed, incorrect content corrected, or FP/Scala best-practice context added. Provide a concise, learning-oriented report that explains why changed English was awkward, unnatural, or grammatically incorrect.
 ---
 
 # Summary Review
@@ -13,6 +13,7 @@ Revise the given Markdown summary in two steps.
 - Prefer bullet points.
 - Strictly preserve the author's intent, meaning, and nuance.
 - Improve clarity and flow without changing the core message or removing important emphasis.
+- Explain meaningful English corrections so the author can learn from them.
 - Add functional programming or Scala context only when it truly helps.
 
 ## Inputs
@@ -32,6 +33,11 @@ Revise the given Markdown summary in two steps.
 - Remove redundant wording.
 - Keep terminology consistent.
 - Preserve Markdown structure unless a small restructure improves readability.
+- Record each meaningful correction with the original text, revised text, issue, and reusable learning point.
+- Distinguish grammatical errors from naturalness, clarity, concision, and style improvements.
+- Do not describe a stylistic preference as a grammar rule.
+- Group repeated instances of the same issue instead of reporting every occurrence.
+- Omit trivial formatting or punctuation changes unless explaining them has learning value.
 
 ### Step 2: Technical Review and Enrichment
 
@@ -53,6 +59,8 @@ Return a review report.
 - Keep the report concise.
 - Group changes by workflow step.
 - Mention only meaningful edits.
+- In Step 1, quote only the shortest phrase or sentence needed to explain each correction.
+- If no English changes are needed, state that explicitly instead of adding an empty correction table.
 
 ## Style Rules
 
@@ -77,6 +85,7 @@ Return a review report.
 
 - The revised Markdown is readable on its own.
 - The report clearly separates Step 1 and Step 2.
+- Every reported English change explains what was wrong or awkward and gives a reusable learning point.
 - Added content is accurate and short.
 - The original meaning, intent, and key nuances are fully preserved without distortion.
 - The final answer does not exceed the user's requested scope.
