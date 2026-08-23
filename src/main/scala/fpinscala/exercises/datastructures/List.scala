@@ -160,6 +160,13 @@ object List: // `List` companion object. Contains functions for creating and wor
       case (_, Nil)                     => Nil
       case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, addPairwise(t1, t2))
 
-  // def zipWith - TODO determine signature
+  def zipWith[A, B, C](a: List[A], b: List[B], f: (A, B) => C): List[C] =
+    @annotation.tailrec
+    def loop(a: List[A], b: List[B], acc: List[C]): List[C] =
+      (a, b) match
+        case (Nil, _)                     => acc
+        case (_, Nil)                     => acc
+        case (Cons(h1, t1), Cons(h2, t2)) => loop(t1, t2, Cons(f(h1, h2), acc))
+    reverse(loop(a, b, Nil))
 
   def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = ???
