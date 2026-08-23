@@ -7,7 +7,7 @@ description: Run fpinscala exercise tests by chapter or by chapter and exercise 
 
 ## Overview
 
-Run the narrowest available test command for the requested fpinscala chapter or exercise. Treat "grade" as "run the repository's tests"; do not compare against answers manually.
+Run the narrowest available test command for the requested fpinscala chapter or exercise. Treat "grade" as "run the repository's tests"; do not compare against answers manually. Report the exact command used.
 
 ## Safety Boundary
 
@@ -55,7 +55,7 @@ Use this map from chapter number to exercise package folder:
    - If mapping is genuinely ambiguous, ask one concise clarification question without listing candidate test names.
 6. Run tests from the repository root with `scala-cli test`.
 7. If Scala CLI fails because Bloop or cache directories outside the sandbox are inaccessible, rerun the same command with escalation approval.
-8. Summarize only the result. If the run fails, say only that the requested test run failed. Do not include failing test names, error summaries, exception types, line numbers, stack traces, assertion details, generated counterexamples, concrete failing inputs, or any interpretation of the likely cause. Do not provide the exercise solution.
+8. Summarize only the result and the exact `scala-cli test` command used. If the run fails, say only that the requested test run failed and provide the command. Do not include failing test names, error summaries, exception types, line numbers, stack traces, assertion details, generated counterexamples, concrete failing inputs, or any interpretation of the likely cause. Do not provide the exercise solution.
 
 ## Commands
 
@@ -89,6 +89,6 @@ Keep the response concise:
 
 - For a passing run, say that the requested test run passed.
 - For a failing run, say only that the requested test run failed.
+- Include the exact `scala-cli test` command used for every passing or failing run.
 - Do not state failing test names, suite names, function names from failures, error messages, exception types, stack traces, line numbers, assertion payloads, generated counterexamples, concrete failing inputs, or why the failure likely happened.
-- Do not include the test command in the final response when the run fails, because filters may reveal which behavior failed.
 - If no test exists for the requested exercise, say only that no matching test exists.
