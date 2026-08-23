@@ -11,8 +11,6 @@ Run the narrowest available test command for the requested fpinscala chapter or 
 
 ## Safety Boundary
 
-- Do not read `answerkey/`.
-- Do not read `src/main/scala/fpinscala/answers/`.
 - Do not infer correctness from answer files.
 - Read exercise source comments and exercise test suites only to map the requested exercise to tests.
 - Report only pass/fail status; never explain or hint at why a failure happened.
