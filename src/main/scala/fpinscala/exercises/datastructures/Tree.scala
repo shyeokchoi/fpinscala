@@ -16,13 +16,16 @@ enum Tree[+A]:
     case Leaf(v)      => Leaf(f(v))
     case Branch(l, r) => Branch(l.map(f), r.map(f))
 
-  def fold[B](f: A => B, g: (B, B) => B): B = ???
+  def fold[B](f: A => B, g: (B, B) => B): B = this match
+    case Leaf(v)      => f(v)
+    case Branch(l, r) => g(l.fold(f, g), r.fold(f, g))
 
-  def sizeViaFold: Int = ???
+  def sizeViaFold: Int = this.fold(_ => 1, (s1, s2) => 1 + s1 + s2)
 
-  def depthViaFold: Int = ???
+  def depthViaFold: Int = this.fold(_ => 0, (d1, d2) => (d1 max d2) + 1)
 
-  def mapViaFold[B](f: A => B): Tree[B] = ???
+  def mapViaFold[B](f: A => B): Tree[B] =
+    this.fold(v => Leaf(f(v)), (t1, t2) => Branch(t1, t2))
 
 object Tree:
 
