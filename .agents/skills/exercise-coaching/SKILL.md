@@ -47,20 +47,20 @@ Use this structure for hint or review responses:
 
 ```markdown
 **Overall**
-Brief assessment of whether the current direction is sound.
+A brief assessment of whether the current direction is sound.
 
 **Answer-Key Hint**
 Source: `answerkey/<folder>/<NN>.hint.md`
 
-<Include the repository hint content. If the hint file is missing, say so.>
+<Include the contents of the repository hint file. If the hint file is missing, say so.>
 
 **Agent Hint**
-- The most important observation from the user's code.
-- One or two focused hints based on the code and exercise requirements.
-- Mention edge cases or properties worth checking.
+- The most important observation about the user's code.
+- One or two focused hints based on the code and the exercise requirements.
+- Any edge cases or properties worth checking.
 
 **Next Step**
-One concrete thing for the user to try next.
+<This section is optional. Include it only when there is a clear, meaningful next step that deepens the user's understanding.
+Do not force a next step when none is needed.
+Do not mention other exercises, especially upcoming ones, because that may reveal hints.>
 ```
-
-For very small questions, keep the same sections but make each section short. If no chapter/exercise number is known, omit `Answer-Key Hint` and explain that the answerkey hint was not loaded.
