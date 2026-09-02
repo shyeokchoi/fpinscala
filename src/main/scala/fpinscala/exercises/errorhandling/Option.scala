@@ -60,7 +60,10 @@ object Option:
       .map(m => xs.foldLeft(0.0)((acc, x) => acc + math.pow(x - m, 2)))
       .map(_ / xs.size)
 
-  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = ???
+  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    // first try:
+    //     a.map(a => (x => f(a, x))).flatMap(g => b.map(g(_)))
+    a.flatMap(aa => b.map(bb => f(aa, bb)))
 
   def sequence[A](as: List[Option[A]]): Option[List[A]] = ???
 
