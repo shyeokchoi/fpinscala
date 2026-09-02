@@ -52,7 +52,13 @@ object Option:
     if xs.isEmpty then None
     else Some(xs.sum / xs.length)
 
-  def variance(xs: Seq[Double]): Option[Double] = ???
+  // answer implementation: mean(xs).flatMap(m => mean(xs.map(x => math.pow(x - m, 2))))
+  // => Before implementing a calculation, describe it using existing function names:
+  // “variance is the mean of squared deviations from the mean.”
+  def variance(xs: Seq[Double]): Option[Double] =
+    mean(xs)
+      .map(m => xs.foldLeft(0.0)((acc, x) => acc + math.pow(x - m, 2)))
+      .map(_ / xs.size)
 
   def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = ???
 
