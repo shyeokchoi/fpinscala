@@ -65,6 +65,23 @@ object Option:
     //     a.map(a => (x => f(a, x))).flatMap(g => b.map(g(_)))
     a.flatMap(aa => b.map(bb => f(aa, bb)))
 
-  def sequence[A](as: List[Option[A]]): Option[List[A]] = ???
+  def sequence[A](as: List[Option[A]]): Option[List[A]] =
+    as.foldRight[Option[List[A]]](Some(Nil))((a, acc) =>
+      acc.flatMap(accVal => a.map(aa => aa :: accVal))
+    )
+
+  /* Here's an explicit recursive version: */
+  def sequence_1[A](as: List[Option[A]]): Option[List[A]] =
+    as match
+      case Nil    => Some(Nil)
+      case h :: t => h.flatMap(hh => sequence(t).map(hh :: _))
+
+  /*
+  It can also be implemented using `foldRight` and `map2`. The type annotation on `foldRight` is needed here; otherwise
+  Scala wrongly infers the result type of the fold as `Some[Nil.type]` and reports a type error (try it!). This is an
+  unfortunate consequence of Scala using subtyping to encode algebraic data types.
+   */
+  def sequence_2[A](as: List[Option[A]]): Option[List[A]] =
+    as.foldRight[Option[List[A]]](Some(Nil))((a, acc) => map2(a, acc)(_ :: _))
 
   def traverse[A, B](as: List[A])(f: A => Option[B]): Option[List[B]] = ???
