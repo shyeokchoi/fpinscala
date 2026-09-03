@@ -53,9 +53,8 @@ Use this map from chapter number to exercise package folder:
    - If tests are not numbered, find `Exercise m` comments in the exercise source and search the suite files for the nearby function, object, or method names.
    - If one exercise has multiple tests, run all matching tests or the narrowest wildcard that covers them.
    - If mapping is genuinely ambiguous, ask one concise clarification question without listing candidate test names.
-6. Run tests from the repository root with `scala-cli test`.
-7. If Scala CLI fails because Bloop or cache directories outside the sandbox are inaccessible, rerun the same command with escalation approval.
-8. Summarize only the result and the exact `scala-cli test` command used. If the run fails, say only that the requested test run failed and provide the command. Do not include failing test names, error summaries, exception types, line numbers, stack traces, assertion details, generated counterexamples, concrete failing inputs, or any interpretation of the likely cause. Do not provide the exercise solution.
+6. Run tests from the repository root with `scala-cli test` in an environment that can access Scala CLI's Bloop cache. Request the required cache access before running the command when necessary.
+7. Summarize only the result and the exact `scala-cli test` command used. If the run fails, say only that the requested test run failed and provide the command. Do not include failing test names, error summaries, exception types, line numbers, stack traces, assertion details, generated counterexamples, concrete failing inputs, or any interpretation of the likely cause. Do not provide the exercise solution.
 
 ## Commands
 
