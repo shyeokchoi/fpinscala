@@ -65,6 +65,11 @@ object Option:
     //     a.map(a => (x => f(a, x))).flatMap(g => b.map(g(_)))
     a.flatMap(aa => b.map(bb => f(aa, bb)))
 
+  def map3[A, B, C, D](a: Option[A], b: Option[B], c: Option[C])(
+      f: (A, B, C) => D
+  ): Option[D] =
+    a.flatMap(aa => b.flatMap(bb => c.map(cc => f(aa, bb, cc))))
+
   def sequence[A](as: List[Option[A]]): Option[List[A]] =
     as.foldRight[Option[List[A]]](Some(Nil))((a, acc) =>
       acc.flatMap(accVal => a.map(aa => aa :: accVal))
