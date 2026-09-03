@@ -29,6 +29,13 @@ object Either:
       case Nil    => Right(Nil)
       case h :: t => f(h).flatMap(hh => traverse(t)(f).map(tt => hh :: tt))
 
+  def traverse_2[E, A, B](es: List[A])(
+      f: A => Either[E, B]
+  ): Either[E, List[B]] =
+    es.foldRight(Right(Nil): Either[E, List[B]])((a, acc) =>
+      f(a).flatMap(aa => acc.map(s => aa :: s))
+    )
+
   def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] =
     traverse(es)(x => x)
 
