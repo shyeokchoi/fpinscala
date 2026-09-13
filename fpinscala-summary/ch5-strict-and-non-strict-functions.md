@@ -17,6 +17,10 @@ def if2[A](cond: Boolean, onTrue: () => A, onFalse: () => A): A = {
 }
 ```
 
+A `thunk` is a parameterless function that represents a delayed computation.
+Here, `onTrue` and `onFalse` are explicit thunks of type `() => A`.
+Creating a thunk does not evaluate its body; calling it with `()` does.
+
 This implementation is clear, but this pattern is common in Scala.
 Therefore, Scala provides simpler syntax:
 
