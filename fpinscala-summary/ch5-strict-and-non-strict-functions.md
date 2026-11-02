@@ -60,3 +60,24 @@ scala> val x = maybeTwice2(true, { println("hi"); 1+41 })
 hi
 x: Int = 84
 ```
+
+## Separating program description from evaluation
+
+- A major theme in FP is separation of concerns: describe a computation separately from running it.
+- A first-class function describes a computation in its body, which runs when the function is called.
+- `Option` represents the presence or absence of a value, leaving the decision of how to handle absence to the caller.
+- A lazy `Stream` describes a sequence without computing its elements until they are needed.
+- Laziness lets us describe a larger expression than we need and evaluate only part of it.
+  - An infinite stream describes how to produce more elements; it does not store infinitely many elements.
+  - For example, searching the stream `1, 2, 3, ...` for `3` only requires the first three elements.
+- `exists` stops at the first match because `||` does not evaluate its right operand when its left operand is `true`.
+- A lazy `foldRight` takes its recursive result by name (`=> B`), so its combining function can stop traversal by not evaluating that result.
+  - In `foldRight(false)((a, b) => p(a) || b)`, `b` describes folding the tail and is evaluated only if `p(a)` is `false`.
+  - This allows the same `foldRight` to implement operations that terminate early.
+
+```scala
+def foldRight[B](z: => B)(f: (A, => B) => B): B =
+  this match
+    case Cons(h, t) => f(h(), t().foldRight(z)(f))
+    case _          => z
+```
