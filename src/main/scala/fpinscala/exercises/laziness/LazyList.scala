@@ -48,7 +48,15 @@ enum LazyList[+A]:
       if p(hh) then cons(hh, t().takeWhile(p)) else empty
     case _ => empty
 
-  def forAll(p: A => Boolean): Boolean = ???
+  def takeWhileWithFoldRight(p: A => Boolean): LazyList[A] =
+    this.foldRight(empty)((x, acc) => if p(x) then cons(x, acc) else empty)
+
+  def forAll(p: A => Boolean): Boolean = this match
+    case Cons(h, t) => p(h()) && t().forAll(p)
+    case _          => true
+
+  def forAllWithFoldRight(p: A => Boolean): Boolean =
+    this.foldRight(true)((x, acc) => p(x) && acc)
 
   def headOption: Option[A] = ???
 
