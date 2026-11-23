@@ -56,9 +56,9 @@ enum LazyList[+A]:
     case _          => true
 
   def forAllWithFoldRight(p: A => Boolean): Boolean =
-    this.foldRight(true)((x, acc) => p(x) && acc)
+    foldRight(true)((x, acc) => p(x) && acc)
 
-  def headOption: Option[A] = this.foldRight(None: Option[A])((x, _) => Some(x))
+  def headOption: Option[A] = foldRight(None: Option[A])((x, _) => Some(x))
 
   // 5.7 map, filter, append, flatmap using foldRight. Part of the exercise is
   // writing your own function signatures.
