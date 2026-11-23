@@ -37,7 +37,7 @@ Use this map from chapter number to exercise package and answerkey folder:
    - If the user only shares code or a function name, infer the exercise from `src/main/scala/fpinscala/exercises/` and nearby comments when possible.
    - If the exercise remains ambiguous, ask one concise clarification question.
 2. Read only the relevant exercise source and the user's submitted code.
-3. When chapter and exercise numbers are known, read `answerkey/<folder>/<NN>.hint.md` and include its content under `Answer-Key Hint`.
+3. When chapter and exercise numbers are known, read `answerkey/<folder>/<NN>.hint.md` and include its content verbatim under `Answer-Key Hint`, in its original language.
 4. Analyze the user's solution for behavior, edge cases, Scala style, FP style, stack safety, purity, and unnecessary complexity.
 5. Give progressive hints without revealing a complete replacement implementation.
 
@@ -52,7 +52,7 @@ A brief assessment of whether the current direction is sound.
 **Answer-Key Hint**
 Source: `answerkey/<folder>/<NN>.hint.md`
 
-<Include the contents of the repository hint file. If the hint file is missing, say so.>
+<Include the contents of the repository hint file verbatim, without translation. If the hint file is missing, say so.>
 
 **Agent Hint**
 - The most important observation about the user's code.
